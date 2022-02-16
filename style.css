@@ -1,0 +1,200 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    --light-bg-color: #d1dae3;
+    --dark-bg-color: #091921;
+    --transition-time: 0.5s;
+}
+
+body{
+    background-color: var(--dark-bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    transition: background-color var(--transition-time);
+}
+
+.clock {
+    color: rgba(255, 255, 255, 0.8);
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 4px solid var(--dark-bg-color);
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.05),
+                20px 20px 20px rgba(0, 0, 0, 0.3),
+                inset -8px -8px 15px rgba(255, 255, 255, 0.05), 
+                inset 20px 20px 20px rgba(0, 0, 0, 0.3); 
+    position: relative;
+    font-size: 1.4rem;
+    transition: box-shadow var(--transition-time), color var(--transition-time), border var(--transition-time);
+}
+
+.clock .number {
+    --rotation: 0;
+    padding: 8px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: rotate(var(--rotation));
+}
+
+.clock .number1 {--rotation: 30deg}
+.clock .number2 {--rotation: 60deg}
+.clock .number3 {--rotation: 90deg}
+.clock .number4 {--rotation: 120deg}
+.clock .number5 {--rotation: 150deg}
+.clock .number6 {--rotation: 180deg}
+.clock .number7 {--rotation: 210deg}
+.clock .number8 {--rotation: 240deg}
+.clock .number9 {--rotation: 270deg}
+.clock .number10 {--rotation: 300deg}
+.clock .number11 {--rotation: 330deg}
+.clock .number span {
+    --rotation: 90;
+    position: absolute; 
+    transform:translateX(-50%) rotate(calc(var(--rotation)*1deg));
+}
+.clock .number .rot180{--rotation: 180}
+.clock .number .rot-90{--rotation: -90}
+
+.clock .hand{
+    --rotation: 90;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    transform: translateX(-50%) rotate(calc(var(--rotation)*1deg));
+    border-radius: 10px 10px 0 0;
+    z-index: 10;
+    transition: background-color var(--transition-time);
+}
+
+.clock .hand.second-hand {
+    background-color: white;
+    height: 40%;
+    width: 0.7%;
+}
+.clock .hand.minute-hand {
+    background-color: white;
+    height: 38%;
+    width: 1.5%;
+}
+.clock .hand.hour-hand {
+    background-color: #ff015e;
+    height: 33%;
+    width: 2%;
+}
+.clock::after{
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 11;
+    border-radius: 50%;
+    transition: background-color var(--transition-time);
+}
+
+body.light {
+    background-color: var(--light-bg-color);
+}
+body.light .clock{
+    border: 4px solid var(--light-bg-color);
+    color: rgba(0, 0, 0, 0.6);
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.5),
+    10px 10px 10px rgba(0, 0, 0, 0.1),
+    inset -8px -8px 15px rgba(255, 255, 255, 0.5), 
+    inset 10px 10px 10px rgba(0, 0, 0, 0.1); 
+}
+body.light .clock .hand.second-hand, body.light .clock::after {
+    background-color: #008eff;
+}
+
+body.light .clock .hand.minute-hand {
+    background-color: var(--dark-bg-color);
+}
+
+
+/* -------------------------------- */
+.toggle-btn {
+    color: var(--light-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-time);
+}
+
+body.light .toggle-btn{
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.switch {
+    margin: 1rem;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(65, 64, 64);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+body.light .slider{
+    background-color: #ccc; 
+}
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
